@@ -1,4 +1,4 @@
-package com.hassanjamil.sampleandroidpostsapp.posts.ui
+package com.hassanjamil.sampleandroidpostsapp.features.posts.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.hassanjamil.sampleandroidpostsapp.posts.data.serializables.Post
+import com.hassanjamil.sampleandroidpostsapp.features.posts.data.serializables.Post
 
 
 @Composable

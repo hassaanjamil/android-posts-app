@@ -13,8 +13,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.hassanjamil.sampleandroidpostsapp.posts.ui.PostViewModel
-import com.hassanjamil.sampleandroidpostsapp.posts.ui.PostsList
+import com.hassanjamil.sampleandroidpostsapp.features.posts.ui.PostViewModel
+import com.hassanjamil.sampleandroidpostsapp.features.posts.ui.PostsList
 import com.hassanjamil.sampleandroidpostsapp.ui.theme.SampleAndroidPostsAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 

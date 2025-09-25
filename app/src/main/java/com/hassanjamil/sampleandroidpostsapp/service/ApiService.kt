@@ -1,10 +1,10 @@
 package com.hassanjamil.sampleandroidpostsapp.service
 
-import com.hassanjamil.sampleandroidpostsapp.posts.data.serializables.Post
-import com.hassanjamil.sampleandroidpostsapp.posts.data.serializables.User
+import com.hassanjamil.sampleandroidpostsapp.features.posts.data.serializables.Post
+import com.hassanjamil.sampleandroidpostsapp.features.posts.data.serializables.User
 import retrofit2.http.GET
 import retrofit2.http.Path
-
+@Suppress("unused")
 interface ApiService {
     @GET("posts")
     suspend fun getPosts(): List<Post>

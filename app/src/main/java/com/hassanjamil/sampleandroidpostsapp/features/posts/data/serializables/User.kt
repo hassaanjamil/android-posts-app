@@ -1,4 +1,4 @@
-package com.hassanjamil.sampleandroidpostsapp.posts.data.serializables
+package com.hassanjamil.sampleandroidpostsapp.features.posts.data.serializables
 
 data class User(
     val id: Int,

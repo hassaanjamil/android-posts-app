@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.dagger.hilt.android)
-    kotlin("kapt")
+    alias(libs.plugins.jetbrains.kotlin.kapt)
 }
 
 android {

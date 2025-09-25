@@ -1,6 +1,6 @@
-package com.hassanjamil.sampleandroidpostsapp.posts.data
+package com.hassanjamil.sampleandroidpostsapp.features.posts.data
 
-import com.hassanjamil.sampleandroidpostsapp.posts.data.serializables.Post
+import com.hassanjamil.sampleandroidpostsapp.features.posts.data.serializables.Post
 import com.hassanjamil.sampleandroidpostsapp.service.ApiService
 import javax.inject.Inject
 

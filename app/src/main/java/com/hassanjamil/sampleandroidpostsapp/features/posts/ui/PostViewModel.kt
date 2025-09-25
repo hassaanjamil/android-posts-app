@@ -1,19 +1,19 @@
-package com.hassanjamil.sampleandroidpostsapp.posts.ui
+package com.hassanjamil.sampleandroidpostsapp.features.posts.ui
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hassanjamil.sampleandroidpostsapp.posts.data.serializables.Post
-import com.hassanjamil.sampleandroidpostsapp.posts.data.PostRepository
+import com.hassanjamil.sampleandroidpostsapp.features.posts.data.serializables.Post
+import com.hassanjamil.sampleandroidpostsapp.features.posts.data.PostRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class PostViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
+    @Suppress("unused") private val _savedStateHandle: SavedStateHandle,
     private val repository: PostRepository
 ): ViewModel() {
     private val _posts = mutableStateListOf<Post>()
