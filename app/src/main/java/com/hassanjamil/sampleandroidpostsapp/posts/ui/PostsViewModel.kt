@@ -2,7 +2,6 @@ package com.hassanjamil.sampleandroidpostsapp.posts.ui
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hassanjamil.sampleandroidpostsapp.posts.data.Post
@@ -23,7 +22,7 @@ class PostsViewModel: ViewModel() {
                 val fetchedPosts = RetrofitClient.apiService.getPosts()
                 _posts.clear()
                 _posts.addAll(fetchedPosts)
-                Log.d("POSTS", "Posts fetched successfully" + fetchedPosts.size)
+                Log.d("POSTS", "Posts fetched successfully " + fetchedPosts.size)
             } catch (e: Exception) {
                 // Handle error
                 e.printStackTrace()
