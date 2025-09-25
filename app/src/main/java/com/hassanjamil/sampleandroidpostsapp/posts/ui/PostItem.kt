@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.hassanjamil.sampleandroidpostsapp.posts.data.Post
+import com.hassanjamil.sampleandroidpostsapp.posts.data.serializables.Post
 
 
 @Composable
@@ -23,7 +23,8 @@ fun PostItem(modifier: Modifier, post: Post) {
                 .padding(16.dp)
         ) {
             val title = post.title?.takeIf { it.isNotBlank() }
-                ?: post.id.let { "Post #$it" }
+                ?: post.id?.let { "Post #$it" }
+                ?: "Post"
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleMedium
