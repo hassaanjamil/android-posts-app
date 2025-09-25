@@ -15,7 +15,7 @@ fun PostsList(
     LazyColumn(modifier = modifier) {
         items(
             items = posts,
-            key = { post -> post.id ?: post.hashCode() }
+            key = { post -> post.id }
         ) { post ->
             PostItem(modifier = itemModifier, post = post)
         }

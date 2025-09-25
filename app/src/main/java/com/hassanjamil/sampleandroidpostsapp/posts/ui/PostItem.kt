@@ -23,8 +23,7 @@ fun PostItem(modifier: Modifier, post: Post) {
                 .padding(16.dp)
         ) {
             val title = post.title?.takeIf { it.isNotBlank() }
-                ?: post.id?.let { "Post #$it" }
-                ?: "Post"
+                ?: post.id.let { "Post #$it" }
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleMedium
