@@ -1,21 +1,15 @@
-package com.hassanjamil.sampleandroidpostsapp.features.posts.ui
+package com.hassanjamil.sampleandroidpostsapp.features.posts.ui.viewModels
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hassanjamil.sampleandroidpostsapp.features.posts.data.serializables.Post
 import com.hassanjamil.sampleandroidpostsapp.features.posts.data.PostRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.hassanjamil.sampleandroidpostsapp.features.posts.data.model.Post
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class PostViewModel @Inject constructor(
-    @Suppress("unused") private val _savedStateHandle: SavedStateHandle,
+class PostViewModel(
     private val repository: PostRepository
-): ViewModel() {
+) : ViewModel() {
     private val _posts = mutableStateListOf<Post>()
     val posts: List<Post> get() = _posts
 
@@ -24,13 +18,11 @@ class PostViewModel @Inject constructor(
     }
 
     fun fetchPosts() {
-//        return repository.getPosts();
         viewModelScope.launch {
             try {
                 val fetchedPosts = repository.getPosts()
                 _posts.clear()
                 _posts.addAll(fetchedPosts)
-                Log.d("POSTS", "Posts fetched successfully " + fetchedPosts.size)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

@@ -1,5 +1,6 @@
 package com.hassanjamil.sampleandroidpostsapp.features.posts.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,19 +12,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.hassanjamil.sampleandroidpostsapp.features.posts.data.serializables.Post
+import com.hassanjamil.sampleandroidpostsapp.features.posts.data.model.Post
 
 
 @Composable
-fun PostItem(modifier: Modifier, post: Post) {
-    ElevatedCard(modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+fun PostListItem(modifier: Modifier, post: Post, onPostClick: (Post) -> Unit) {
+    ElevatedCard(
+        modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
+                .clickable { onPostClick(post) }
         ) {
             val title = post.title?.takeIf { it.isNotBlank() }
-                ?: post.id.let { "Post #$it" }
+                ?: post.id?.let { "Post #$it" }
+                ?: "Post"
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleMedium
