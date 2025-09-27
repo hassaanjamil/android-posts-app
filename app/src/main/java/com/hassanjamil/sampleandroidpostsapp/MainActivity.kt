@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.hassanjamil.sampleandroidpostsapp.navigation.NavigationRoot
-import com.hassanjamil.sampleandroidpostsapp.theme.AndroidPostsAppTheme
+import com.hassanjamil.sampleandroidpostsapp.presentation.navigation.graph.RootGraph
+import com.hassanjamil.sampleandroidpostsapp.presentation.theme.AndroidPostsAppTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AndroidPostsAppTheme(dynamicColor = false) {
-                NavigationRoot()
+                RootGraph()
             }
         }
     }
