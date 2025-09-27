@@ -1,4 +1,4 @@
-package com.hassanjamil.sampleandroidpostsapp.ui.theme
+package com.hassanjamil.sampleandroidpostsapp.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -9,9 +9,9 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import com.hassanjamil.sampleandroidpostsapp.ui.theme.WHITE
 
 private val DarkColorScheme = darkColorScheme(
+    background = BLACK,
     primary = Teal40,
     secondary = TealGrey40,
     tertiary = Orange40,
@@ -21,6 +21,7 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
+    background = WHITE,
     primary = Teal80,
     secondary = TealGrey80,
     tertiary = Orange80,
@@ -40,7 +41,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun SampleAndroidPostsAppTheme(
+fun AndroidPostsAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

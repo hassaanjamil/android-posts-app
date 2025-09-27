@@ -1,7 +1,7 @@
 package com.hassanjamil.sampleandroidpostsapp.di
 
-import com.hassanjamil.sampleandroidpostsapp.service.ApiService
-import com.hassanjamil.sampleandroidpostsapp.service.RetrofitClient
+import com.hassanjamil.sampleandroidpostsapp.network.ApiService
+import com.hassanjamil.sampleandroidpostsapp.network.RetrofitClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
 

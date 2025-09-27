@@ -1,4 +1,4 @@
-package com.hassanjamil.sampleandroidpostsapp.service
+package com.hassanjamil.sampleandroidpostsapp.network
 
 import com.hassanjamil.sampleandroidpostsapp.features.posts.data.model.Post
 import com.hassanjamil.sampleandroidpostsapp.features.posts.data.model.User

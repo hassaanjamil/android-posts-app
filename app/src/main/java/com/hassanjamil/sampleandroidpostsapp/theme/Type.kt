@@ -1,4 +1,4 @@
-package com.hassanjamil.sampleandroidpostsapp.ui.theme
+package com.hassanjamil.sampleandroidpostsapp.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

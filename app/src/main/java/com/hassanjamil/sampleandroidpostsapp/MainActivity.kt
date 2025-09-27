@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.hassanjamil.sampleandroidpostsapp.navigation.NavigationRoot
-import com.hassanjamil.sampleandroidpostsapp.ui.theme.SampleAndroidPostsAppTheme
+import com.hassanjamil.sampleandroidpostsapp.theme.AndroidPostsAppTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            SampleAndroidPostsAppTheme(dynamicColor = false) {
+            AndroidPostsAppTheme(dynamicColor = false) {
                 NavigationRoot()
             }
         }

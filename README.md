@@ -15,23 +15,24 @@ An open-source **Android Kotlin Jetpack Compose** sample that demonstrates how t
 ## Highlights
 - 100% Kotlin with Jetpack Compose UI and Material 3 theming.
 - Navigation orchestrated by the new Navigation 3 back stack with custom nav keys.
-- Reactive UI fed by coroutines and immutable state collections.
+- Reactive UI fed by coroutines, `StateFlow`, and immutable Compose state collections.
 - Koin modules wire up Retrofit, repositories, and ViewModels for quick DI bootstrapping.
 - Retrofit + OkHttp + Gson deliver a simple, testable networking stack hitting `http://10.0.2.2:3000/posts` in the Android emulator.
+- Post detail screen resolves author information on-demand by calling the user endpoint and observing a `State` - backed state holder.
 - Modern Gradle setup (Kotlin DSL, version catalogs) ready for experimentation or production hardening.
 
 ## Architecture Overview
 ```
-ApplicationPosts (starts Koin) ──> Koin Modules (network, repository, viewModel)
+ApplicationPosts (starts Koin) ──> Koin Modules (network, repositories, viewModel)
           │
           ├─> RetrofitClient (base networking layer)
-          ├─> PostRepository (data access + mapping)
-          └─> PostViewModel (state holder using coroutines)
+          ├─> PostRepository / UserRepository (data access + mapping)
+          └─> PostViewModel (posts list + user detail state via StateFlow)
                          │
                          └─> Compose UI (PostsMain ➜ PostsList ➜ PostDetail)
 ```
 
-- **State Management:** `PostViewModel` exposes Compose-friendly state via `mutableStateListOf`, cleared and filled on each fetch.
+- **State Management:** `PostViewModel` exposes Compose-friendly state via `mutableStateListOf` for posts and `StateFlow` for the selected author, cleared and refetched on each request.
 - **Navigation:** `NavigationRoot` drives a back stack of `Screen` nav keys (`PostsList`, `PostDetail`), keeping state with Navigation 3 decorators.
 - **UI Layer:** `PostsMain` consumes the ViewModel using `koinViewModel()` and renders list/detail composables with Material 3 components.
 
@@ -51,7 +52,7 @@ app/
  │   ├─ ApplicationPosts.kt          # Koin bootstrap
  │   ├─ navigation/                  # NavigationRoot + Screen nav keys
  │   ├─ features/posts/              # Feature module
- │   │   ├─ data/                    # Repository + models
+ │   │   ├─ data/                    # Repositories (posts, users) + models
  │   │   └─ ui/                      # Compose screens + ViewModel
  │   └─ di/                          # Koin modules (network, repository, viewModel)
  └─ ...
@@ -89,6 +90,10 @@ app/
     ]
   }
   ```
+
+  > For more details, have a look at my open source Rest API Project:
+  https://github.com/hassaanjamil/npm-sample-posts-rest-api
+Configure it, following the instructions and run the local server to make this android app works for you.
 
 ## Roadmap Ideas
 - Offline caching with Room and Koin scopes.
