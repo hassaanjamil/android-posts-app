@@ -11,12 +11,11 @@ import com.hassanjamil.sampleandroidpostsapp.features.posts.ui.viewModels.PostVi
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun PostsMain(
+fun Home(
     modifier: Modifier = Modifier,
     onPostClick: (Post) -> Unit
 ) {
     val postViewModel: PostViewModel = koinViewModel()
-    val posts = postViewModel.posts
 
     Scaffold(modifier = modifier) { innerPadding ->
         PostsList(
@@ -24,7 +23,7 @@ fun PostsMain(
                 .padding(innerPadding)
                 .fillMaxSize(),
             itemModifier = Modifier.fillMaxWidth(),
-            posts = posts,
+            posts = postViewModel.posts,
             onPostClick = onPostClick
         )
     }

@@ -8,7 +8,7 @@ import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.scene.rememberSceneSetupNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.hassanjamil.sampleandroidpostsapp.features.posts.ui.PostDetail
-import com.hassanjamil.sampleandroidpostsapp.features.posts.ui.PostsMain
+import com.hassanjamil.sampleandroidpostsapp.features.posts.ui.Home
 import com.hassanjamil.sampleandroidpostsapp.navigation.Screen.PostDetail as PostDetailScreen
 
 @Composable
@@ -25,7 +25,7 @@ fun NavigationRoot() {
         entryProvider = { key ->
             when (key) {
                 is Screen.Home -> NavEntry(key) {
-                    PostsMain(onPostClick = { post ->
+                    Home(onPostClick = { post ->
                         backStack.add(PostDetailScreen(post))
                     })
                 }
