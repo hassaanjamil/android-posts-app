@@ -16,5 +16,7 @@ data class Post(
     @SerializedName("body")
     val body: String,
     @SerializedName("userId")
-    val userId: Int
+    val userId: Int,
+    @SerializedName("isFavorite")
+    var isFavorite: Boolean,
 )
