@@ -1,4 +1,4 @@
-package com.hassanjamil.sampleandroidpostsapp.presentation.features.posts
+package com.hassanjamil.sampleandroidpostsapp.presentation.features.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -26,16 +26,15 @@ fun PostListItem(modifier: Modifier, post: Post, onPostClick: (Post) -> Unit) {
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            val title = post.title?.takeIf { it.isNotBlank() }
-                ?: post.id?.let { "Post #$it" }
-                ?: "Post"
+            val title = post.title.takeIf { it.isNotBlank() }
+                ?: post.id.let { "Post #$it" }
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleMedium
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = post.body?.takeIf { it.isNotBlank() } ?: "No description available.",
+                text = post.body.takeIf { it.isNotBlank() } ?: "No description available.",
                 style = MaterialTheme.typography.bodyMedium
             )
         }

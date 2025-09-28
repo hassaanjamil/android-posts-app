@@ -25,8 +25,8 @@ sealed class BottomBarScreen(
 
     @Serializable
     data object Favorite : BottomBarScreen(
-        icon = R.drawable.search,
-        title = "Search"
+        icon = R.drawable.favorite,
+        title = "Favorite"
     )
 
     @Serializable

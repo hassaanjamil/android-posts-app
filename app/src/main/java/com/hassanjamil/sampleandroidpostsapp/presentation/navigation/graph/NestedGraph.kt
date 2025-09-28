@@ -2,12 +2,18 @@ package com.hassanjamil.sampleandroidpostsapp.presentation.navigation.graph
 
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -15,6 +21,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.entryProvider
@@ -24,7 +31,7 @@ import androidx.navigation3.ui.NavDisplay
 import com.hassanjamil.sampleandroidpostsapp.R
 import com.hassanjamil.sampleandroidpostsapp.data.model.Post
 import com.hassanjamil.sampleandroidpostsapp.presentation.features.favorite.FavoriteScreen
-import com.hassanjamil.sampleandroidpostsapp.presentation.features.posts.HomeScreen
+import com.hassanjamil.sampleandroidpostsapp.presentation.features.home.HomeScreen
 import com.hassanjamil.sampleandroidpostsapp.presentation.features.settings.SettingsScreen
 import com.hassanjamil.sampleandroidpostsapp.presentation.navigation.model.BottomBarScreen
 import com.hassanjamil.sampleandroidpostsapp.presentation.navigation.model.BottomBarScreenSaver
@@ -80,25 +87,37 @@ fun NestedGraph(navigateToProfile: () -> Unit, onPostClick: (post: Post) -> Unit
                 }
             }
         }
-    ) {
-        NavDisplay(
-            backStack = backStack,
-            onBack = { backStack.removeLastOrNull() },
-            entryDecorators = listOf(
-                rememberSavedStateNavEntryDecorator(),
-                rememberViewModelStoreNavEntryDecorator()
-            ),
-            entryProvider = entryProvider {
-                entry<BottomBarScreen.Home> {
-                    HomeScreen(onPostClick = onPostClick)
-                }
-                entry<BottomBarScreen.Favorite> {
-                    FavoriteScreen()
-                }
-                entry<BottomBarScreen.Settings> {
-                    SettingsScreen()
-                }
+    ) { innerPadding ->
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .consumeWindowInsets(innerPadding)
+            ) {
+                NavDisplay(
+                    backStack = backStack,
+                    onBack = { backStack.removeLastOrNull() },
+                    entryDecorators = listOf(
+                        rememberSavedStateNavEntryDecorator(),
+                        rememberViewModelStoreNavEntryDecorator()
+                    ),
+                    entryProvider = entryProvider {
+                        entry<BottomBarScreen.Home> {
+                            HomeScreen(onPostClick = onPostClick)
+                        }
+                        entry<BottomBarScreen.Favorite> {
+                            FavoriteScreen()
+                        }
+                        entry<BottomBarScreen.Settings> {
+                            SettingsScreen()
+                        }
+                    }
+                )
             }
-        )
+        }
     }
 }
