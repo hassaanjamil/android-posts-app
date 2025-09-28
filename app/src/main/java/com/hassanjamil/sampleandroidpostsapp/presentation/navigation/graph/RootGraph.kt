@@ -9,7 +9,7 @@ import androidx.navigation3.ui.NavDisplay
 import com.hassanjamil.sampleandroidpostsapp.presentation.features.auth.AuthScreen
 import com.hassanjamil.sampleandroidpostsapp.presentation.features.profile.ProfileScreen
 import com.hassanjamil.sampleandroidpostsapp.presentation.navigation.model.Screen
-import com.hassanjamil.sampleandroidpostsapp.presentation.features.posts.PostDetail as PostDetailScene
+import com.hassanjamil.sampleandroidpostsapp.presentation.features.postDetail.PostDetail as PostDetailScene
 
 @Composable
 fun RootGraph() {

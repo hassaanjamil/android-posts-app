@@ -1,4 +1,4 @@
-package com.hassanjamil.sampleandroidpostsapp.presentation.features.posts
+package com.hassanjamil.sampleandroidpostsapp.presentation.features.home
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth

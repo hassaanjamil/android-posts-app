@@ -2,6 +2,8 @@ package com.hassanjamil.sampleandroidpostsapp.presentation.features.profile
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -9,12 +11,19 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun ProfileScreen() {
-    Box(
+    Surface(
         modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+        color = MaterialTheme.colorScheme.background
     ) {
-        Text(
-            text = "Profile Screen"
-        )
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Profile Screen",
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        }
     }
 }

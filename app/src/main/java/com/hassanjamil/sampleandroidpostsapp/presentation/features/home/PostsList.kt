@@ -1,4 +1,4 @@
-package com.hassanjamil.sampleandroidpostsapp.presentation.features.posts
+package com.hassanjamil.sampleandroidpostsapp.presentation.features.home
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -16,7 +16,7 @@ fun PostsList(
     LazyColumn(modifier = modifier) {
         items(
             items = posts,
-            key = { post -> post.id ?: post.hashCode() }
+            key = { post -> post.id }
         ) { post ->
             PostListItem(
                 modifier = itemModifier,
