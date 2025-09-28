@@ -1,6 +1,7 @@
 package com.hassanjamil.sampleandroidpostsapp
 
 import android.app.Application
+import com.hassanjamil.sampleandroidpostsapp.data.di.databaseModule
 import com.hassanjamil.sampleandroidpostsapp.data.di.networkModule
 import com.hassanjamil.sampleandroidpostsapp.data.di.repositoryModule
 import com.hassanjamil.sampleandroidpostsapp.data.di.viewModelModule
@@ -20,7 +21,8 @@ class MyApplication : Application() {
             modules(
                 networkModule,
                 repositoryModule,
-                viewModelModule
+                viewModelModule,
+                databaseModule
             )
         }
     }

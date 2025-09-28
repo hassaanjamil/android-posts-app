@@ -32,7 +32,7 @@ sealed class BottomBarScreen(
     @Serializable
     data object Settings : BottomBarScreen(
         icon = R.drawable.settings,
-        title = "Profile"
+        title = "Settings"
     )
 }
 
