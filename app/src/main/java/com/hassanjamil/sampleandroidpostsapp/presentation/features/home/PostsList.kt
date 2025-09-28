@@ -11,7 +11,8 @@ fun PostsList(
     modifier: Modifier = Modifier,
     itemModifier: Modifier = Modifier,
     posts: List<Post>,
-    onPostClick: (Post) -> Unit,
+    onPostClick: ((Post) -> Unit)? = null,
+    onFavoritePostClick: ((Post) -> Unit)? = null,
 ) {
     LazyColumn(modifier = modifier) {
         items(
@@ -21,7 +22,8 @@ fun PostsList(
             PostListItem(
                 modifier = itemModifier,
                 post = post,
-                onPostClick = onPostClick
+                onPostClick = onPostClick,
+                onFavoritePostClick = onFavoritePostClick,
             )
         }
     }
