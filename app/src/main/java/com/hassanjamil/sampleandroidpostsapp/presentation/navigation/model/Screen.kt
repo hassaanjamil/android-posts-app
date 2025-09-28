@@ -13,7 +13,7 @@ sealed class Screen: NavKey {
     data object NestedGraph : Screen()
 
     @Serializable
-    data object Settings : Screen()
+    data object Profile : Screen()
 
     @Serializable
     data class PostDetail(val post: Post) : Screen()

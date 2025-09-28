@@ -33,7 +33,7 @@ import com.hassanjamil.sampleandroidpostsapp.presentation.navigation.model.botto
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun NestedGraph(navigateToSettings: () -> Unit, onPostClick: (post: Post) -> Unit) {
+fun NestedGraph(navigateToProfile: () -> Unit, onPostClick: (post: Post) -> Unit) {
     val backStack = rememberNavBackStack<BottomBarScreen>(BottomBarScreen.Home)
 
     var currentBottomBarScreen: BottomBarScreen by rememberSaveable(
@@ -47,10 +47,10 @@ fun NestedGraph(navigateToSettings: () -> Unit, onPostClick: (post: Post) -> Uni
             TopAppBar(
                 title = { Text("Posts App") },
                 actions = {
-                    IconButton(onClick = navigateToSettings) {
+                    IconButton(onClick = navigateToProfile) {
                         Icon(
-                            painter = painterResource(R.drawable.settings),
-                            contentDescription = "Settings icon"
+                            painter = painterResource(R.drawable.person),
+                            contentDescription = "Profile icon"
                         )
                     }
                 }

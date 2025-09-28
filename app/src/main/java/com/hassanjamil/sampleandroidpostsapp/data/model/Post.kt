@@ -1,11 +1,20 @@
 package com.hassanjamil.sampleandroidpostsapp.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
 
 @Serializable
+@Entity(tableName = "Post")
 data class Post(
-    val id: Int? = null,
-    val title: String? = null,
-    val body: String? = null,
-    val userId: Int? = null,
+    @PrimaryKey
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("title")
+    val title: String,
+    @SerializedName("body")
+    val body: String,
+    @SerializedName("userId")
+    val userId: Int
 )
