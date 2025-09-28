@@ -25,6 +25,9 @@ fun RootGraph() {
         entryProvider = entryProvider {
             entry<Screen.Auth> {
                 AuthScreen(onLoginClick = {
+                    // Removing auth screen from backstack
+                    // before adding nested graph
+                    backStack.clear()
                     backStack.add(Screen.NestedGraph)
                 })
             }
