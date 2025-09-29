@@ -40,7 +40,7 @@ import com.hassanjamil.sampleandroidpostsapp.presentation.navigation.model.botto
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun NestedGraph(navigateToProfile: () -> Unit, onPostClick: (post: Post) -> Unit) {
+fun NestedBottomBarGraph(navigateToProfile: () -> Unit, onPostClick: (post: Post) -> Unit) {
     val backStack = rememberNavBackStack<BottomBarScreen>(BottomBarScreen.Home)
 
     var currentBottomBarScreen: BottomBarScreen by rememberSaveable(

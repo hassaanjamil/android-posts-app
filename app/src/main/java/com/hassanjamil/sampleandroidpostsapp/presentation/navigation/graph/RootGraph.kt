@@ -8,12 +8,12 @@ import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.hassanjamil.sampleandroidpostsapp.presentation.features.auth.AuthScreen
 import com.hassanjamil.sampleandroidpostsapp.presentation.features.profile.ProfileScreen
-import com.hassanjamil.sampleandroidpostsapp.presentation.navigation.model.Screen
+import com.hassanjamil.sampleandroidpostsapp.presentation.navigation.model.RootScreen
 import com.hassanjamil.sampleandroidpostsapp.presentation.features.postDetail.PostDetail as PostDetailScene
 
 @Composable
 fun RootGraph() {
-    val backStack = rememberNavBackStack<Screen>(Screen.Auth)
+    val backStack = rememberNavBackStack<RootScreen>(RootScreen.Auth)
 
     NavDisplay(
         backStack = backStack,
@@ -23,27 +23,27 @@ fun RootGraph() {
             rememberViewModelStoreNavEntryDecorator()
         ),
         entryProvider = entryProvider {
-            entry<Screen.Auth> {
+            entry<RootScreen.Auth> {
                 AuthScreen(onLoginClick = {
                     // Removing auth screen from backstack
                     // before adding nested graph
                     backStack.clear()
-                    backStack.add(Screen.NestedGraph)
+                    backStack.add(RootScreen.NestedGraph)
                 })
             }
-            entry<Screen.Profile> {
+            entry<RootScreen.Profile> {
                 ProfileScreen()
             }
-            entry<Screen.PostDetail> { navEntry ->
+            entry<RootScreen.PostDetail> { navEntry ->
                 PostDetailScene(post = navEntry.post)
             }
-            entry<Screen.NestedGraph> {
-                NestedGraph(
+            entry<RootScreen.NestedGraph> {
+                NestedBottomBarGraph(
                     navigateToProfile = {
-                        backStack.add(Screen.Profile)
+                        backStack.add(RootScreen.Profile)
                     },
                     onPostClick = { post ->
-                        backStack.add(Screen.PostDetail(post))
+                        backStack.add(RootScreen.PostDetail(post))
                     }
                 )
             }
