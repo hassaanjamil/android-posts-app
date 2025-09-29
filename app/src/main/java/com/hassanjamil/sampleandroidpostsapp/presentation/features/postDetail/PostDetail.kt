@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -33,7 +35,8 @@ import org.koin.androidx.compose.koinViewModel
 fun PostDetail(
     modifier: Modifier = Modifier,
     post: Post,
-    postViewModel: PostViewModel = koinViewModel()
+    postViewModel: PostViewModel = koinViewModel(),
+    postDetailViewModel: PostDetailViewModel = koinViewModel()
 ) {
     val userState by postViewModel.user.collectAsState()
 
@@ -41,8 +44,14 @@ fun PostDetail(
         post.userId?.let { postViewModel.fetchUserById(it) }
     }
 
+    LaunchedEffect(post.id) {
+        post.id.let { postDetailViewModel.getComments(post.id) }
+    }
+
     Surface(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
         color = MaterialTheme.colorScheme.background
     ) {
         // Use a Column so both cards are stacked and spaced consistently.
@@ -94,10 +103,36 @@ fun PostDetail(
                         else -> null
                     }
                     Text(
-                        modifier = Modifier.padding(start = 3.dp ),
+                        modifier = Modifier.padding(start = 3.dp),
                         text = userLabel ?: "User details not available",
                         style = MaterialTheme.typography.bodyMedium
                     )
+                }
+            }
+
+            if (postDetailViewModel.comments.isNotEmpty()) {
+                // Comments Card
+                ElevatedCard(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .padding(16.dp),
+                    ) {
+                        postDetailViewModel.comments.map { comment ->
+                            Row {
+                                Icon(
+                                    painter = painterResource(R.drawable.quote),
+                                    contentDescription = "Comment icon"
+                                )
+                                Text(
+                                    modifier = Modifier.padding(start = 3.dp),
+                                    text = comment.body?.takeIf { it.isNotBlank() } ?: "Comment",
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            }
+                        }
+                    }
                 }
             }
         }

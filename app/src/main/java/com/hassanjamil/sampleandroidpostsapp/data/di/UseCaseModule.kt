@@ -1,5 +1,6 @@
 package com.hassanjamil.sampleandroidpostsapp.data.di
 
+import com.hassanjamil.sampleandroidpostsapp.domain.usecase.GetCommentsUseCase
 import com.hassanjamil.sampleandroidpostsapp.domain.usecase.GetPostsUseCase
 import com.hassanjamil.sampleandroidpostsapp.domain.usecase.GetUserByIdUseCase
 import com.hassanjamil.sampleandroidpostsapp.domain.usecase.GetFavoritePostsUseCase
@@ -11,4 +12,5 @@ val useCaseModule = module {
     single { GetUserByIdUseCase(get()) }
     single { GetFavoritePostsUseCase(get()) }
     single { ToggleFavoritePostUseCase(get()) }
+    single { GetCommentsUseCase(get()) }
 }
