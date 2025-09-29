@@ -5,16 +5,16 @@ import com.hassanjamil.sampleandroidpostsapp.data.model.Post
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class Screen: NavKey {
+sealed class RootScreen: NavKey {
     @Serializable
-    data object Auth : Screen()
+    data object Auth : RootScreen()
 
     @Serializable
-    data object NestedGraph : Screen()
+    data object NestedGraph : RootScreen()
 
     @Serializable
-    data object Profile : Screen()
+    data object Profile : RootScreen()
 
     @Serializable
-    data class PostDetail(val post: Post) : Screen()
+    data class PostDetail(val post: Post) : RootScreen()
 }
