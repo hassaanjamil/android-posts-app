@@ -26,7 +26,7 @@ fun FavoriteScreen(modifier: Modifier = Modifier, onPostClick: ((Post) -> Unit)?
                 .windowInsetsPadding(WindowInsets.safeDrawing),
             contentAlignment = Alignment.Center
         ) {
-            Text("No Favorite posts found")
+            Text("No Favorites")
         }
         return
     }

@@ -1,4 +1,4 @@
-package com.hassanjamil.sampleandroidpostsapp.domain.di
+package com.hassanjamil.sampleandroidpostsapp.data.di
 
 import com.hassanjamil.sampleandroidpostsapp.domain.usecase.GetPostsUseCase
 import com.hassanjamil.sampleandroidpostsapp.domain.usecase.GetUserByIdUseCase
