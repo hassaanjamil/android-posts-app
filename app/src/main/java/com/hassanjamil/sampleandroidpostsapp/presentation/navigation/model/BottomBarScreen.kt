@@ -36,6 +36,8 @@ sealed class BottomBarScreen(
     )
 }
 
+
+
 val BottomBarScreenSaver = Saver<BottomBarScreen, String>(
     save = { it::class.simpleName ?: "Unknown" },
     restore = {
@@ -47,3 +49,4 @@ val BottomBarScreenSaver = Saver<BottomBarScreen, String>(
         }
     }
 )
+

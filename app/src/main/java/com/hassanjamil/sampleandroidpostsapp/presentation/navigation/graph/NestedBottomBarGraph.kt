@@ -29,7 +29,7 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.hassanjamil.sampleandroidpostsapp.R
-import com.hassanjamil.sampleandroidpostsapp.data.model.Post
+import com.hassanjamil.sampleandroidpostsapp.domain.model.Post
 import com.hassanjamil.sampleandroidpostsapp.presentation.features.favorite.FavoriteScreen
 import com.hassanjamil.sampleandroidpostsapp.presentation.features.home.HomeScreen
 import com.hassanjamil.sampleandroidpostsapp.presentation.features.settings.SettingsScreen
@@ -44,6 +44,7 @@ fun NestedBottomBarGraph(navigateToProfile: () -> Unit, onPostClick: (post: Post
     val backStack = rememberNavBackStack<BottomBarScreen>(BottomBarScreen.Home)
 
     var currentBottomBarScreen: BottomBarScreen by rememberSaveable(
+        inputs = arrayOf(backStack),
         stateSaver = BottomBarScreenSaver
     ) { mutableStateOf(BottomBarScreen.Home) }
 
@@ -110,7 +111,7 @@ fun NestedBottomBarGraph(navigateToProfile: () -> Unit, onPostClick: (post: Post
                             HomeScreen(onPostClick = onPostClick)
                         }
                         entry<BottomBarScreen.Favorite> {
-                            FavoriteScreen()
+                            FavoriteScreen(onPostClick = onPostClick)
                         }
                         entry<BottomBarScreen.Settings> {
                             SettingsScreen()

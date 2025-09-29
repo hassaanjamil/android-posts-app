@@ -3,18 +3,18 @@ package com.hassanjamil.sampleandroidpostsapp.presentation.features.home
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hassanjamil.sampleandroidpostsapp.data.model.Post
-import com.hassanjamil.sampleandroidpostsapp.data.model.User
-import com.hassanjamil.sampleandroidpostsapp.data.repositories.PostRepository
-import com.hassanjamil.sampleandroidpostsapp.data.repositories.UserRepository
+import com.hassanjamil.sampleandroidpostsapp.domain.model.Post
+import com.hassanjamil.sampleandroidpostsapp.domain.model.User
+import com.hassanjamil.sampleandroidpostsapp.domain.usecase.GetPostsUseCase
+import com.hassanjamil.sampleandroidpostsapp.domain.usecase.GetUserByIdUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class PostViewModel(
-    private val postRepos: PostRepository,
-    private val userRepos: UserRepository,
+    private val getPostsUseCase: GetPostsUseCase,
+    private val getUserByIdUseCase: GetUserByIdUseCase,
 ) : ViewModel() {
     private val _posts = mutableStateListOf<Post>()
     val posts: List<Post> get() = _posts
@@ -28,25 +28,31 @@ class PostViewModel(
 
     fun fetchPosts() {
         viewModelScope.launch {
-            try {
-                val fetchedPosts = postRepos.getPosts()
-                _posts.clear()
-                _posts.addAll(fetchedPosts)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+            runCatching { getPostsUseCase() }
+                .onSuccess { fetchedPosts ->
+                    _posts.clear()
+                    _posts.addAll(fetchedPosts)
+                }
+                .onFailure { it.printStackTrace() }
+        }
+    }
+
+    fun updateFavoriteState(postId: Int, isFavorite: Boolean) {
+        val index = _posts.indexOfFirst { it.id == postId }
+        if (index >= 0) {
+            val updated = _posts[index].copy(isFavorite = isFavorite)
+            _posts[index] = updated
         }
     }
 
     fun fetchUserById(userId: Int) {
         viewModelScope.launch {
-            try {
-                _user.value = null
-                val fetchedUser = userRepos.getUserById(userId)
-                _user.value = fetchedUser
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+            runCatching { getUserByIdUseCase(userId) }
+                .onSuccess { fetchedUser -> _user.value = fetchedUser }
+                .onFailure {
+                    _user.value = null
+                    it.printStackTrace()
+                }
         }
     }
 }

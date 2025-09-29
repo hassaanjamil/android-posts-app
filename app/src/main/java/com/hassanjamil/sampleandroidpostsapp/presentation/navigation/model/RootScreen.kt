@@ -1,11 +1,11 @@
 package com.hassanjamil.sampleandroidpostsapp.presentation.navigation.model
 
 import androidx.navigation3.runtime.NavKey
-import com.hassanjamil.sampleandroidpostsapp.data.model.Post
+import com.hassanjamil.sampleandroidpostsapp.domain.model.Post
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class RootScreen: NavKey {
+sealed class RootScreen : NavKey {
     @Serializable
     data object Auth : RootScreen()
 
