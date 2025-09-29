@@ -10,7 +10,7 @@ sealed class RootScreen: NavKey {
     data object Auth : RootScreen()
 
     @Serializable
-    data object NestedGraph : RootScreen()
+    data object NestedBottomBarGraph : RootScreen()
 
     @Serializable
     data object Profile : RootScreen()
