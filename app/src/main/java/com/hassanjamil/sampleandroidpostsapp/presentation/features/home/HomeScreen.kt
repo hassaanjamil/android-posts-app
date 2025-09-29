@@ -4,13 +4,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.hassanjamil.sampleandroidpostsapp.data.model.Post
+import com.hassanjamil.sampleandroidpostsapp.domain.model.Post
 import com.hassanjamil.sampleandroidpostsapp.presentation.features.favorite.FavoriteViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(
-    onPostClick: (Post) -> Unit
+    onPostClick: ((Post) -> Unit)?
 ) {
     val postViewModel: PostViewModel = koinViewModel()
     val favoriteViewModel: FavoriteViewModel = koinViewModel()
@@ -21,8 +21,10 @@ fun HomeScreen(
         itemModifier = Modifier.fillMaxWidth(),
         posts = postViewModel.posts,
         onPostClick = onPostClick,
-        onFavoritePostClick = {
-            favoriteViewModel.toggleFavoritePost(it)
+        onFavoritePostClick = { selectedPost ->
+            val nextFavoriteState = !selectedPost.isFavorite
+            postViewModel.updateFavoriteState(selectedPost.id, nextFavoriteState)
+            favoriteViewModel.toggleFavoritePost(selectedPost.copy(isFavorite = nextFavoriteState))
         }
     )
 }

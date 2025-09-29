@@ -12,7 +12,7 @@ interface PostDao {
     suspend fun insert(post: Post)
 
     @Query("Select * From Post Where id = :id")
-    suspend fun getPostById(id: Int): Post
+    suspend fun getPostById(id: Int): Post?
 
     @Query("DELETE FROM Post WHERE id = :id")
     suspend fun deletePostById(id: Int)

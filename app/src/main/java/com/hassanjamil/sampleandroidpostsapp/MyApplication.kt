@@ -5,6 +5,7 @@ import com.hassanjamil.sampleandroidpostsapp.data.di.databaseModule
 import com.hassanjamil.sampleandroidpostsapp.data.di.networkModule
 import com.hassanjamil.sampleandroidpostsapp.data.di.repositoryModule
 import com.hassanjamil.sampleandroidpostsapp.data.di.viewModelModule
+import com.hassanjamil.sampleandroidpostsapp.domain.di.useCaseModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -21,6 +22,7 @@ class MyApplication : Application() {
             modules(
                 networkModule,
                 repositoryModule,
+                useCaseModule,
                 viewModelModule,
                 databaseModule
             )

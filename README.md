@@ -1,6 +1,6 @@
 # Sample Android Posts App
 
-An open-source **Android Kotlin Jetpack Compose** sample that demonstrates how to build a modern posts feed backed by a REST API. The project showcases **Navigation 3**, **Koin dependency injection**, **Retrofit/OkHttp networking**, and a clean UI layer powered by **Material 3**. Clone it, run it, and ⭐️ star it if it inspires your next app!
+An open-source **Android Kotlin Jetpack Compose** sample that demonstrates how to build a modern posts feed backed by a REST API using a layered, test-ready **Clean Architecture** approach. The project showcases **Navigation 3**, **Koin dependency injection**, **Retrofit/OkHttp networking**, and a clean UI layer powered by **Material 3**. Clone it, run it, and ⭐️ star it if it inspires your next app!
 
 ## Table of Contents
 - [Highlights](#highlights)
@@ -15,26 +15,26 @@ An open-source **Android Kotlin Jetpack Compose** sample that demonstrates how t
 ## Highlights
 - 100% Kotlin with Jetpack Compose UI and Material 3 theming.
 - Navigation orchestrated by the new Navigation 3 back stack with custom nav keys.
-- Reactive UI fed by coroutines, `StateFlow`, and immutable Compose state collections.
-- Koin modules wire up Retrofit, repositories, and ViewModels for quick DI bootstrapping.
+- Reactive UI fed by coroutines, `StateFlow`, and immutable Compose state collections driven by domain use-cases.
+- Koin modules wire up Retrofit, Room favorites, domain repositories, use cases, and presentation ViewModels.
 - Retrofit + OkHttp + Gson deliver a simple, testable networking stack hitting `http://10.0.2.2:3000/posts` in the Android emulator.
-- Post detail screen resolves author information on-demand by calling the user endpoint and observing a `State` - backed state holder.
+- Post detail screen resolves author information on-demand by calling the user endpoint and observing a `StateFlow`-backed state holder.
 - Modern Gradle setup (Kotlin DSL, version catalogs) ready for experimentation or production hardening.
 
 ## Architecture Overview
 ```
-ApplicationPosts (starts Koin) ──> Koin Modules (network, repositories, viewModel)
-          │
-          ├─> RetrofitClient (base networking layer)
-          ├─> PostRepository / UserRepository (data access + mapping)
-          └─> PostViewModel (posts list + user detail state via StateFlow)
-                         │
-                         └─> Compose UI (PostsMain ➜ PostsList ➜ PostDetail)
+MyApplication (starts Koin)
+        │
+        ├─ data/di Modules (Retrofit, Room, repository implementations)
+        ├─ domain/di Modules (use cases, repository contracts)
+        └─ presentation ViewModels (consume use cases)
+                │
+                └─ Compose UI (Home ➜ PostsList ➜ PostDetail + Favorite/Profile scenes)
 ```
 
-- **State Management:** `PostViewModel` exposes Compose-friendly state via `mutableStateListOf` for posts and `StateFlow` for the selected author, cleared and refetched on each request.
-- **Navigation:** `NavigationRoot` drives a back stack of `Screen` nav keys (`PostsList`, `PostDetail`), keeping state with Navigation 3 decorators.
-- **UI Layer:** `PostsMain` consumes the ViewModel using `koinViewModel()` and renders list/detail composables with Material 3 components.
+- **State Management:** `PostViewModel` (presentation layer) exposes Compose-friendly state via `mutableStateListOf` for posts and `StateFlow` for the selected author, relying on domain use-cases (`GetPosts`, `GetUserById`).
+- **Navigation:** `RootGraph` + `NestedBottomBarGraph` drive the Navigation 3 back stack with serializable nav keys (`RootScreen`, `BottomBarScreen`).
+- **UI Layer:** Composables use `koinViewModel()` helpers and themed Material 3 surfaces, while favorites toggle instantly via domain logic.
 
 ## Tech Stack
 - Kotlin 2.1.10
@@ -49,12 +49,20 @@ ApplicationPosts (starts Koin) ──> Koin Modules (network, repositories, view
 ```
 app/
  ├─ src/main/java/com/hassanjamil/sampleandroidpostsapp
- │   ├─ ApplicationPosts.kt          # Koin bootstrap
- │   ├─ navigation/                  # NavigationRoot + Screen nav keys
- │   ├─ features/posts/              # Feature module
- │   │   ├─ data/                    # Repositories (posts, users) + models
- │   │   └─ ui/                      # Compose screens + ViewModel
- │   └─ di/                          # Koin modules (network, repository, viewModel)
+ │   ├─ MyApplication.kt             # Koin bootstrap
+ │   ├─ data/                        # Infrastructure (Retrofit, Room, mappers, impl repos)
+ │   │   ├─ di/                      # Network/DB/repository modules
+ │   │   ├─ mapper/                  # DTO ↔ domain translators
+ │   │   ├─ model/                   # Retrofit DTOs & Room entities
+ │   │   └─ repositories/            # Post/User repository implementations
+ │   ├─ domain/                      # Clean domain layer
+ │   │   ├─ di/                      # Use-case module
+ │   │   ├─ model/                   # `Post`, `User` entities (Serializable for Navigation)
+ │   │   ├─ repository/              # Repository interfaces
+ │   │   └─ usecase/                 # `GetPosts`, `GetUserById`, `GetFavoritePosts`, `ToggleFavoritePost`
+ │   └─ presentation/                # UI + ViewModels
+ │       ├─ navigation/              # RootGraph/NestedBottomBarGraph + nav keys
+ │       └─ features/                # Feature-specific screens & ViewModels (home, favorites, profile, post detail)
  └─ ...
 ```
 

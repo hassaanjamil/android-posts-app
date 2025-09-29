@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.hassanjamil.sampleandroidpostsapp.R
-import com.hassanjamil.sampleandroidpostsapp.data.model.Post
+import com.hassanjamil.sampleandroidpostsapp.domain.model.Post
 import com.hassanjamil.sampleandroidpostsapp.presentation.features.home.PostViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -38,7 +38,7 @@ fun PostDetail(
     val userState by postViewModel.user.collectAsState()
 
     LaunchedEffect(post.userId) {
-        post.userId.let { postViewModel.fetchUserById(it) }
+        post.userId?.let { postViewModel.fetchUserById(it) }
     }
 
     Surface(
@@ -61,15 +61,15 @@ fun PostDetail(
                     modifier = Modifier
                         .padding(16.dp)
                 ) {
-                    val title = post.title.takeIf { it.isNotBlank() }
-                        ?: post.id.let { "Post #$it" }
+                    val title = post.title?.takeIf { it.isNotBlank() }
+                        ?: "Post #${post.id}"
                     Text(
                         text = title,
                         style = MaterialTheme.typography.titleMedium
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = post.body.takeIf { it.isNotBlank() } ?: "No description available.",
+                        text = post.body?.takeIf { it.isNotBlank() } ?: "No description available.",
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
