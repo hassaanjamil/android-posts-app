@@ -1,5 +1,6 @@
 package com.hassanjamil.sampleandroidpostsapp.data.network
 
+import com.hassanjamil.sampleandroidpostsapp.data.model.Comment
 import com.hassanjamil.sampleandroidpostsapp.data.model.Post
 import com.hassanjamil.sampleandroidpostsapp.data.model.User
 import retrofit2.http.GET
@@ -14,4 +15,7 @@ interface ApiService {
 
     @GET("users/{id}")
     suspend fun getUserById(@Path("id") id: Int): User
+
+    @GET("comments/{id}")
+    suspend fun getComments(@Path("id") id: Int): List<Comment>
 }
