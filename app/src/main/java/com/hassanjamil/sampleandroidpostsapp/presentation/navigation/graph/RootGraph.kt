@@ -28,7 +28,7 @@ fun RootGraph() {
                     // Removing auth screen from backstack
                     // before adding nested graph
                     backStack.clear()
-                    backStack.add(RootScreen.NestedGraph)
+                    backStack.add(RootScreen.NestedBottomBarGraph)
                 })
             }
             entry<RootScreen.Profile> {
@@ -37,7 +37,7 @@ fun RootGraph() {
             entry<RootScreen.PostDetail> { navEntry ->
                 PostDetailScene(post = navEntry.post)
             }
-            entry<RootScreen.NestedGraph> {
+            entry<RootScreen.NestedBottomBarGraph> {
                 NestedBottomBarGraph(
                     navigateToProfile = {
                         backStack.add(RootScreen.Profile)
