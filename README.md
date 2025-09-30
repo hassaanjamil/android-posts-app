@@ -66,6 +66,14 @@ app/
  └─ ...
 ```
 
+## Screenshots
+<div style="display: flex; gap: 20px;">
+    <!--suppress CheckImageSize -->
+    <img src="screenshots/Preview1.png" width="300" alt="Preview 1"/>
+    <!--suppress CheckImageSize -->
+    <img src="screenshots/Preview2.png" width="300" alt="Preview 2"/>
+</div>
+
 ## Getting Started
 1. **Clone** the repository:
    ```bash
