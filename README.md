@@ -3,7 +3,7 @@
 An open-source **Android Kotlin Jetpack Compose** sample that demonstrates how to build a modern posts feed backed by a REST API using a layered, test-ready **Clean Architecture** approach. The project showcases **Navigation 3**, **Koin dependency injection**, **Retrofit/OkHttp networking**, and a clean UI layer powered by **Material 3**. Clone it, run it, and ⭐️ star it if it inspires your next app!
 
   > For this app, please have a look at my open source [Posts Rest API respository](https://github.com/hassaanjamil/node-posts-rest-api):
-Configure it, by following the instructions and run the local server to make this android app works for you, and check if you are running your server using the same port number (3000) or not.
+Configure it, by following the instructions and run the local server to make this app works for you, and check if you are running your server using the same port number (3000) or not.
 
 ## Table of Contents
 - [Highlights](#highlights)
